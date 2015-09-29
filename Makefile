@@ -7,7 +7,7 @@ OBJ_DIR = bin
 CXX = clang++
 CXX += $(addprefix -I,$(INC_DIR))
 CXX += -Wall -Werror
-CXX += -std=c++11 -stdlib=libc++
+CXX += -std=c++14 -stdlib=libc++
 CXX += -O0 -g
 
 LD = clang++
