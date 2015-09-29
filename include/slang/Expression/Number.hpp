@@ -8,6 +8,9 @@ namespace slang {
         namespace _priv {
             typedef long long i64;
             typedef double f64;
+
+            static inline i64 parseI64(const std::string& s) { return std::stoll(s); }
+            static inline f64 parseF64(const std::string& s) { return std::stod(s); }
         }
 
         class Integer : public Base {
@@ -22,7 +25,7 @@ namespace slang {
         class Float : public Base {
         public:
             Float(_priv::f64 value)
-                    : Base(Type::INTEGER), value(value)
+                    : Base(Type::FLOAT), value(value)
                     {}
 
             const _priv::f64 value;

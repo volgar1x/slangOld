@@ -100,16 +100,42 @@ void printLexem(const slang::Lexem &lex) {
 void printExpression(const slang::Expression::Base &base) {
     switch (base.type) {
         case slang::Expression::Type::LIST:
+        case slang::Expression::Type::SET:
+        case slang::Expression::Type::VEC:
         {
-            auto list = static_cast<const slang::Expression::List&>(base);
-            cout << "(";
+            auto list = static_cast<const slang::Expression::Collection&>(base);
+            switch (base.type) {
+                case slang::Expression::Type::LIST:
+                    cout << "(";
+                    break;
+                case slang::Expression::Type::SET:
+                    cout << "{";
+                    break;
+                case slang::Expression::Type::VEC:
+                    cout << "[";
+                    break;
+                default:
+                    throw "impossible";
+            }
             bool first = true;
             for (auto expression : list.expressions) {
                 if (first) first = false;
                 else cout << " ";
                 printExpression(*expression);
             }
-            cout << ")";
+            switch (base.type) {
+                case slang::Expression::Type::LIST:
+                    cout << ")";
+                    break;
+                case slang::Expression::Type::SET:
+                    cout << "}";
+                    break;
+                case slang::Expression::Type::VEC:
+                    cout << "]";
+                    break;
+                default:
+                    throw "impossible";
+            }
         }
         break;
 
