@@ -3,6 +3,7 @@
 
 #include "slang/Lexer.hpp"
 #include "slang/Parser.hpp"
+#include "slang/Interpreter.hpp"
 
 using namespace std;
 
@@ -33,7 +34,14 @@ int main(int, char **) {
             if (expression->type == slang::Expression::Type::END_OF_FILE) {
                 break;
             }
+
+            auto result = slang::Interpreter::interpret(*expression);
+
             printExpression(*expression);
+            cout << endl;
+
+            cout << " => ";
+            printExpression(*result);
             cout << endl;
         }
     } catch (const char* reason) {

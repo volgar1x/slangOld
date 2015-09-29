@@ -66,13 +66,13 @@ namespace slang {
     }
 
     LexemPtr Lexer::makeLexem(const LexemType type) {
-        auto lex = LexemPtr(new Lexem(m_line, m_column, type));
+        auto lex = make_unique<Lexem>(m_line, m_column, type);
         m_column += 1;
         return lex;
     }
 
     LexemPtr Lexer::makeLexem(const string *value) {
-        auto lex = LexemPtr(new AtomLexem(value, m_line, m_column));
+        auto lex = make_unique<AtomLexem>(value, m_line, m_column);
         m_column += value->size();
         return lex;
     }
