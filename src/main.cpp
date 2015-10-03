@@ -30,12 +30,12 @@ int main(int, char **) {
     try {
         slang::Parser parser(lexer);
         while (parser.hasNext()) {
-            auto expression = parser.next();
+            shared_ptr<slang::Expression::Base> expression = parser.next();
             if (expression->type == slang::Expression::Type::END_OF_FILE) {
                 break;
             }
 
-            auto result = slang::Interpreter::interpret(*expression);
+            auto result = slang::Interpreter::interpret(expression);
 
             printExpression(*expression);
             cout << endl;

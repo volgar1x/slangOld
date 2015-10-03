@@ -72,7 +72,7 @@ namespace slang {
     }
 
     LexemPtr Lexer::makeLexem(const string *value) {
-        auto lex = make_unique<AtomLexem>(value, m_line, m_column);
+        auto lex = unique_ptr<Lexem>(new AtomLexem(value, m_line, m_column));
         m_column += value->size();
         return lex;
     }

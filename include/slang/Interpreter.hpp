@@ -9,9 +9,9 @@
 
 namespace slang {
 namespace Interpreter {
-    std::unique_ptr<Expression::Base> interpret(const Expression::Base&);
+    std::shared_ptr<Expression::Base> interpret(std::shared_ptr<Expression::Base>);
 
-    std::unique_ptr<Expression::Base> call(const std::string& fun, const std::vector<Expression::Base*>& args);
+    std::shared_ptr<Expression::Base> call(const std::string& fun, const std::vector<Expression::Base*>& args);
 }
 }
 
